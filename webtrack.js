@@ -4,11 +4,16 @@ var mainVideo;
 var frameCounter;
 var vidLoader;
 var newVideo;
+var playIcon;
+var playButton;
+var shouldPause = false;
 
 function pageInit(){
     mainVideo = document.getElementById("mainVideo");
     frameCounter = document.getElementById("frameCounter");
     vidLoader = document.getElementById("vidLoader");
+    playIcon = document.getElementById("playIcon");
+    playButton= document.getElementById("playButton");
 }
 
 function init(){
@@ -78,11 +83,25 @@ function updateFile(){
 }
 
 async function playVideo() {
+    playIcon.innerHTML = "pause";
+    playButton.setAttribute("onclick",  "pauseVideo()");
     for(i = currentFrame; i < frameCount; i++){
-        nextFrame();
-        await new Promise(r => setTimeout(r, 1000 / frameRate));
+        if(shouldPause == false){
+            nextFrame();
+            await new Promise(r => setTimeout(r, 1000 / frameRate));
+        } else {
+            break;
+        }
 
     }
-    currentFrame = 0;
-    changeFrame();
+    if(currentFrame == frameCount){
+        currentFrame = 0;
+    }
+    shouldPause = false;
+    playIcon.innerHTML = "play_arrow";
+    playButton.setAttribute("onclick",  "playVideo()");
+}
+
+function pauseVideo(){
+    shouldPause = true;
 }
