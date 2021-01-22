@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <title>webtrack</title>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="stylesheet.css">
+
+    </head>
+
+    <body onload="init()">
+        <h1>webtrack</h1>
+        <input id="vidLoader" type='file' accept="video/*;capture=camcorder" onchange="updateFile()"/>
+        <br><br>
+        <button onclick="setStick()" id="setStick">Set calibration stick</button>
+        <button id="addStick">Track point</button>
+        <br><br>
+        <button onclick="previousFrame()"><span class="material-icons">skip_previous</span></button>
+        <button onclick="nextFrame()"><span class="material-icons">skip_next</span></button>
+        <p id="frameCounter"></p>
+        
+        <script src="webtrack.js"></script>
+        <video width="70%" id="mainVideo">
+        </video>
+
+        
+
+
+    </body>
+</html>
