@@ -1,19 +1,32 @@
 var currentFrame = 0;
-var frameRate = 25;
+var frameRate = 30;
+var mainVideo;
+var frameCounter;
+var vidLoader;
+var newVideo;
 
-var mainVideo
-var frameCounter
-var newVideo
-
-function init(){
+function pageInit(){
     mainVideo = document.getElementById("mainVideo");
     frameCounter = document.getElementById("frameCounter");
     vidLoader = document.getElementById("vidLoader");
 }
 
-function nextFrame(){
-    currentFrame += 1;
+function init(){
+    frameRate = parseInt(prompt("Enter video framerate"));
+    duration = mainVideo.duration;
+    frameCount = Math.round(frameRate * duration);
+    console.log("initialised!")
     changeFrame();
+}
+
+function nextFrame(){
+    if(currentFrame < frameCount){
+        currentFrame += 1;
+        changeFrame();
+    } else {
+        currentFrame = 0;
+        changeFrame();
+    }
 }
 
 function previousFrame(){
@@ -21,14 +34,15 @@ function previousFrame(){
         currentFrame -= 1;
         changeFrame();
     } else {
-        alert("Already at start of video!")
+        currentFrame = frameCount;
+        changeFrame();
     }
 }
 
 function changeFrame(){
     mainVideo.currentTime = currentFrame / frameRate;
 
-    frameCounter.innerHTML = "Current frame: " + String(currentFrame);
+    frameCounter.innerHTML = "Current frame: " + String(currentFrame) + "/" + String(frameCount);
 }
 
 function setStick(){
@@ -48,11 +62,27 @@ function updateFile(){
     const reader = new FileReader();
   
     reader.addEventListener("load", function () {
-      // convert image file to base64 string
-      mainVideo.src = reader.result;
-    }, false);
+        mainVideo.src = reader.result;
+        mainVideo.load();
+        
+    }
+    , false);
+
+    mainVideo.addEventListener('loadeddata', function() {
+        init();
+     }, false);
   
     if (file) {
       reader.readAsDataURL(file);
     }
+}
+
+async function playVideo() {
+    for(i = currentFrame; i < frameCount; i++){
+        nextFrame();
+        await new Promise(r => setTimeout(r, 1000 / frameRate));
+
+    }
+    currentFrame = 0;
+    changeFrame();
 }

@@ -7,23 +7,21 @@
 
     </head>
 
-    <body onload="init()">
+    <body onload="pageInit()">
         <h1>webtrack</h1>
         <input id="vidLoader" type='file' accept="video/*;capture=camcorder" onchange="updateFile()"/>
         <br><br>
         <button onclick="setStick()" id="setStick">Set calibration stick</button>
         <button id="addStick">Track point</button>
         <br><br>
+
         <button onclick="previousFrame()"><span class="material-icons">skip_previous</span></button>
+        <button onclick="playVideo()"><span class="material-icons">play_arrow</span></button>
         <button onclick="nextFrame()"><span class="material-icons">skip_next</span></button>
-        <p id="frameCounter"></p>
+
+        <p id="frameCounter">Current frame: 0/NAN</p>
         
         <script src="webtrack.js"></script>
-        <video width="70%" id="mainVideo">
-        </video>
-
-        
-
-
+        <video onload="init()" width="70%" id="mainVideo"></video>
     </body>
 </html>
