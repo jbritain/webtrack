@@ -3,3 +3,13 @@
 * {
     font-family: 'Roboto', sans-serif;
 }
+
+#mainCanvas, #mainVideo{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+#mainVideo {
+    width: 70%;
+}
