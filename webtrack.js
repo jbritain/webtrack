@@ -3,7 +3,7 @@
 
 
 // VARIABLE DECLARATIONS
-var currentFrame = 0;
+var currentFrame = 1;
 var frameRate = 30;
 var shouldPause = false;
 var mainVideo;
@@ -13,11 +13,12 @@ var newVideo;
 var playIcon;
 var playButton;
 var mainCanvas;
-var stickCoord1 = [0, 0];
-var stickCoord2 = [0, 0];
+var stickCoord1
+var stickCoord2
 var rect;
 var stickLength;
 var distanceRatio;
+var frameLocations = [];
 
 var clickState = 0; // What action should be performed when the canvas is clicked, as listed below
 // 0 - Do nothing
@@ -44,6 +45,7 @@ function init(){
 
     mainCanvas.height = mainVideo.offsetHeight;
     mainCanvas.width = mainVideo.offsetWidth;
+
 }
 
 // Skips to next frame
@@ -52,14 +54,15 @@ function nextFrame(){
         currentFrame += 1;
         changeFrame();
     } else {
-        currentFrame = 0;
+        currentFrame = 1;
         changeFrame();
     }
+    drawShapes();
 }
 
 // Skips back one frame
 function previousFrame(){
-    if(currentFrame > 0){
+    if(currentFrame > 1){
         currentFrame -= 1;
         changeFrame();
     } else {
@@ -144,6 +147,7 @@ function canvasClick() {
         stickCoord1 = [event.clientX - rect.left, event.clientY - rect.top]
 
         clickState = 2;
+        drawShapes()
 
     } else if (clickState == 2){
         stickCoord2 = [event.clientX - rect.left, event.clientY - rect.top]
@@ -158,6 +162,9 @@ function canvasClick() {
         distanceRatio = stickLength / Math.sqrt(Math.pow(stickCoord1[0] - stickCoord2[0], 2), Math.pow(stickCoord1[1] - stickCoord2[1], 2))
 
         drawShapes()
+    } else if (clickState == 3){
+        frameLocations[currentFrame] = [event.clientX - rect.left, event.clientY - rect.top];
+        nextFrame();
     }
 }
 
@@ -170,14 +177,53 @@ function drawShapes(){
     ctx.font = "20px Arial";
     
     // Calibration Stick
+    if(stickCoord1){
+        ctx.strokeRect(stickCoord1[0] - 5, stickCoord1[1] - 5, 10, 10)
+    }
+    if(stickCoord2){
+        ctx.strokeRect(stickCoord2[0] - 5, stickCoord2[1] - 5, 10, 10)
 
-    ctx.strokeRect(stickCoord1[0] - 5, stickCoord1[1] - 5, 10, 10)
-    ctx.strokeRect(stickCoord2[0] - 5, stickCoord2[1] - 5, 10, 10)
-    ctx.fillStyle = "#0000FF";
-    ctx.fillText(stickLength + ("m"), ((stickCoord1[0] + stickCoord2[0]) / 2) + 10, (stickCoord1[1] + stickCoord2[1]) / 2);
+        ctx.fillText(stickLength + ("m"), ((stickCoord1[0] + stickCoord2[0]) / 2) + 10, (stickCoord1[1] + stickCoord2[1]) / 2);
 
-    ctx.beginPath();
-    ctx.moveTo(stickCoord1[0], stickCoord1[1]);
-    ctx.lineTo(stickCoord2[0], stickCoord2[1]);
-    ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(stickCoord1[0], stickCoord1[1]);
+        ctx.lineTo(stickCoord2[0], stickCoord2[1]);
+        ctx.stroke();
+    }
+
+    ctx.strokeStyle = "#FF0000";
+    ctx.fillStyle = "#FF0000";
+
+    // Current Tracking Point
+    if(frameLocations[currentFrame]){
+        ctx.strokeRect(frameLocations[currentFrame][0] - 5, frameLocations[currentFrame][1] - 5, 10, 10)
+    }
+
+    ctx.strokeStyle = "#9e0000";
+
+    // Previous Tracking Points
+    if(currentFrame > 0){
+        for(i = currentFrame - 1; i > 0; i--){
+            if(frameLocations[i]){
+                ctx.strokeRect(frameLocations[i][0] - 5, frameLocations[i][1] - 5, 10, 10)
+            }
+        }
+    }
+    
+}
+
+// Start tracking points
+function trackPoints(){
+    document.body.style.cursor = "crosshair";
+    document.getElementById("trackPoints").innerHTML = "Finish";
+    document.getElementById("trackPoints").setAttribute("onclick",  "resetTrackButton()");
+    clickState = 3;
+}
+
+
+// Resets the button and cursor for when you are tracking points
+function resetTrackButton(){
+    document.body.style.cursor = "default";
+    document.getElementById("trackPoints").innerHTML = "Track points";
+    document.getElementById("trackPoints").setAttribute("onclick",  "trackPoints()");
 }
