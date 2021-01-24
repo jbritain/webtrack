@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>webtrack</title>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="webtrack.css">
+
+    </head>
+
+    <body onload="pageInit()">
+        <script src="webtrack.js"></script>
+
+        <h1>webtrack</h1>
+
+        <h3>Track</h3>
+        <input id="vidLoader" type='file' accept="video/*" onchange="updateFile()"/>
+        <br><br>
+        <button onclick="setStick()" id="setStick">Set calibration stick</button>
+        <button onclick="trackPoints()" id="trackPoints">Track points</button>
+        <br><br>
+
+        <button onclick="previousFrame()"><span class="material-icons">skip_previous</span></button>
+        <button id="playButton" onclick="playVideo()"><span id="playIcon" class="material-icons">play_arrow</span></button>
+        <button onclick="nextFrame()"><span class="material-icons">skip_next</span></button>
+
+        <p id="frameCounter">Current frame: 0/NAN</p>
+        
+        <div id="mainContainer" style="position: relative">
+            <video onload="init()" width="100%" id="mainVideo"></video>
+            <canvas onclick="canvasClick()" id="mainCanvas"></canvas>
+        </div>
+
+        <h3>Data</h3>
+
+        <table id="dataTable">
+            <tr>
+                <th>Frame</th>
+                <th>T</th>
+                <th>X</th>
+                <th>Y</th>
+                <th>V</th>
+            </tr>
+        </table>
+    </body>
+</html>

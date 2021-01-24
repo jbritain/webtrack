@@ -1,21 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
 * {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
 }
 
-#mainCanvas, #mainVideo{
-    position: absolute;
-    top: 0px;
-    left: 0px;
+body {
+    background-color: #404040;
 }
 
-#mainVideo {
-    width: 100%;
-}
-
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-
+a:link, a:visited, h1{
+    color: #F6008D;
 }

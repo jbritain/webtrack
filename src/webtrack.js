@@ -2,6 +2,7 @@
 // Copyright Joshua Britain, 2021
 
 
+
 // VARIABLE DECLARATIONS
 var currentFrame = 1;
 var frameRate = 30;
@@ -36,6 +37,14 @@ function pageInit(){
     mainCanvas = document.getElementById("mainCanvas");
 }
 
+function setSizes(){
+    mainCanvas.height = mainVideo.offsetHeight;
+    document.getElementById("mainContainer").style.height = mainVideo.offsetHeight;
+    mainCanvas.width = mainVideo.offsetWidth;
+
+    console.log("sizes set")
+}
+
 // Set values for variables that change per video
 function init(){
     frameRate = parseInt(prompt("Enter video framerate")); // This does not technically matter as the video will always play at the correct speed but it means each frame will be representing a proper one
@@ -43,11 +52,14 @@ function init(){
     frameCount = Math.round(frameRate * duration);
     changeFrame();
 
-    mainCanvas.height = mainVideo.offsetHeight;
-    document.getElementById("mainContainer").style.height = mainVideo.offsetHeight;
-    mainCanvas.width = mainVideo.offsetWidth;
+    setSizes();
+
+
+    console.log("init")
 
 }
+
+window.onresize = setSizes;
 
 // Skips to next frame
 function nextFrame(){

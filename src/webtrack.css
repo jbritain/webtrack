@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+* {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+body {
+    padding: 30px;
+}
+
+#mainCanvas, #mainVideo{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+#mainVideo {
+    width: 70%;
+}
+
+@media only screen and (max-width: 600px) {
+    #mainVideo {
+        width: 100%;
+    }
+  }
+
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+
+}
+
+body {
+    background-color: #404040;
+}
+
+p, a, h1, h2, h3, table{
+    color: #F6008D;
+}
