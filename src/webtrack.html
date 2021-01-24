@@ -15,13 +15,13 @@
         <h3>Track</h3>
         <input id="vidLoader" type='file' accept="video/*" onchange="updateFile()"/>
         <br><br>
-        <button onclick="setStick()" id="setStick">Set calibration stick</button>
-        <button onclick="trackPoints()" id="trackPoints">Track points</button>
+        <button disabled="true" onclick="setStick()" id="setStick">Set calibration stick</button>
+        <button disabled="true" onclick="trackPoints()" id="trackPoints">Track points</button>
         <br><br>
 
-        <button onclick="previousFrame()"><span class="material-icons">skip_previous</span></button>
-        <button id="playButton" onclick="playVideo()"><span id="playIcon" class="material-icons">play_arrow</span></button>
-        <button onclick="nextFrame()"><span class="material-icons">skip_next</span></button>
+        <button disabled="true" id="previousButton" onclick="previousFrame()"><span class="material-icons">skip_previous</span></button>
+        <button disabled="true" id="playButton" onclick="playVideo()"><span id="playIcon" class="material-icons">play_arrow</span></button>
+        <button disabled="true" id="nextButton" onclick="nextFrame()"><span class="material-icons">skip_next</span></button>
 
         <p id="frameCounter">Current frame: 0/NAN</p>
         

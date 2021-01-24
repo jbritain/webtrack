@@ -48,6 +48,11 @@ function setSizes(){
 // Set values for variables that change per video
 function init(){
     frameRate = parseInt(prompt("Enter video framerate")); // This does not technically matter as the video will always play at the correct speed but it means each frame will be representing a proper one
+    document.getElementById("setStick").disabled = false;
+    previousButton = document.getElementById("previousButton").disabled = false;
+    nextButton = document.getElementById("nextButton").disabled = false;
+    playButton.disabled = false;
+    
     duration = mainVideo.duration;
     frameCount = Math.round(frameRate * duration);
     changeFrame();
@@ -97,6 +102,7 @@ function setStick(){
     document.getElementById("setStick").innerHTML = "Cancel";
     document.getElementById("setStick").setAttribute("onclick",  "resetStickButton()");
     clickState = 1;
+
 }
 
 // Resets the button and cursor for when you are setting the stick position
@@ -113,7 +119,6 @@ function updateFile(){
   
     reader.addEventListener("load", function () {
         mainVideo.src = reader.result;
-        mainVideo.load();
         
     }
     , false);
@@ -174,8 +179,9 @@ function canvasClick() {
         stickLength = prompt("Enter length of calibration stick")
 
         distanceRatio =  stickLength / Math.sqrt(Math.pow(stickCoord1[0] - stickCoord2[0], 2) + Math.pow(stickCoord1[1] - stickCoord2[1], 2))
-
+        
         drawShapes()
+        document.getElementById("trackPoints").disabled = false;
     } else if (clickState == 3){
         frameLocations[currentFrame] = [event.clientX - rect.left, event.clientY - rect.top];
         displayData();
