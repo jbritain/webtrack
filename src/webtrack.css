@@ -38,3 +38,9 @@ body {
 p, a, h1, h2, h3, table{
     color: #F6008D;
 }
+
+table {
+    display: block;
+    height: 200px;
+    overflow-y: scroll;
+}

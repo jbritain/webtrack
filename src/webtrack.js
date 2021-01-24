@@ -38,6 +38,7 @@ function pageInit(){
 }
 
 function setSizes(){
+    rect = mainCanvas.getBoundingClientRect();
     mainCanvas.height = mainVideo.offsetHeight;
     document.getElementById("mainContainer").style.height = mainVideo.offsetHeight;
     mainCanvas.width = mainVideo.offsetWidth;
@@ -64,7 +65,7 @@ function init(){
 
 }
 
-window.onresize = setSizes;
+window.onresize = setSizes(); drawShapes();
 
 // Skips to next frame
 function nextFrame(){
@@ -160,7 +161,6 @@ function pauseVideo(){
 
 //Executes something when canvas is clicked
 function canvasClick() {
-    rect = mainCanvas.getBoundingClientRect();
     
     if (clickState == 1){
         stickCoord1 = [event.clientX - rect.left, event.clientY - rect.top]
@@ -214,19 +214,23 @@ function drawShapes(){
 
     ctx.strokeStyle = "#FF0000";
     ctx.fillStyle = "#FF0000";
+    ctx.font = "10px Arial";
 
     // Current Tracking Point
     if(frameLocations[currentFrame]){
         ctx.strokeRect(frameLocations[currentFrame][0] - 5, frameLocations[currentFrame][1] - 5, 10, 10)
+        ctx.fillText(i, frameLocations[currentFrame][0] + 7, frameLocations[currentFrame][1] + 7);
     }
 
     ctx.strokeStyle = "#9e0000";
-
+    ctx.fillStyle = "#9e0000";
+    
     // Previous Tracking Points
     if(currentFrame > 0){
         for(i = currentFrame - 1; i > 0; i--){
             if(frameLocations[i]){
                 ctx.strokeRect(frameLocations[i][0] - 5, frameLocations[i][1] - 5, 10, 10)
+                ctx.fillText(i, frameLocations[i][0] + 7, frameLocations[i][1] + 7);
             }
         }
     }
@@ -278,7 +282,7 @@ function displayData(){
             newY.innerHTML = (frameLocations[i][1] * distanceRatio).toFixed(2);
 
             if(frameLocations[i - 1]){
-                newV.innerHTML = ((Math.sqrt(Math.pow(frameLocations[i][0] - frameLocations[i - 1][0], 2) + Math.pow(frameLocations[i][1] - frameLocations[i - 1][1], 2))  * distanceRatio) / (1/frameRate)).toFixed(2);
+                newV.innerHTML = ((Math.sqrt(Math.pow(frameLocations[i][0] - frameLocations[i - 1][0], 2) + Math.pow(frameLocations[i][1] - frameLocations[i - 1][1], 2)) * distanceRatio) / (1/frameRate)).toFixed(2);
             } else {
                 newV.innerHTML = 0;
             }
