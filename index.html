@@ -11,6 +11,8 @@
         <script src="webtrack.js"></script>
 
         <h1>webtrack</h1>
+
+        <h3>Track</h3>
         <input id="vidLoader" type='file' accept="video/*" onchange="updateFile()"/>
         <br><br>
         <button onclick="setStick()" id="setStick">Set calibration stick</button>
@@ -23,9 +25,21 @@
 
         <p id="frameCounter">Current frame: 0/NAN</p>
         
-        <div style="position: relative">
+        <div id="mainContainer" style="position: relative">
             <video onload="init()" width="100%" id="mainVideo"></video>
             <canvas onclick="canvasClick()" id="mainCanvas"></canvas>
         </div>
+
+        <h3>Data</h3>
+
+        <table id="dataTable">
+            <tr>
+                <th>Frame</th>
+                <th>T</th>
+                <th>X</th>
+                <th>Y</th>
+                <th>V</th>
+            </tr>
+        </table>
     </body>
 </html>

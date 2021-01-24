@@ -44,6 +44,7 @@ function init(){
     changeFrame();
 
     mainCanvas.height = mainVideo.offsetHeight;
+    document.getElementById("mainContainer").style.height = mainVideo.offsetHeight;
     mainCanvas.width = mainVideo.offsetWidth;
 
 }
@@ -69,6 +70,7 @@ function previousFrame(){
         currentFrame = frameCount;
         changeFrame();
     }
+    drawShapes();
 }
 
 // Updates the frame currently displayed by the video
@@ -159,11 +161,12 @@ function canvasClick() {
 
         stickLength = prompt("Enter length of calibration stick")
 
-        distanceRatio = stickLength / Math.sqrt(Math.pow(stickCoord1[0] - stickCoord2[0], 2), Math.pow(stickCoord1[1] - stickCoord2[1], 2))
+        distanceRatio =  stickLength / Math.sqrt(Math.pow(stickCoord1[0] - stickCoord2[0], 2) + Math.pow(stickCoord1[1] - stickCoord2[1], 2))
 
         drawShapes()
     } else if (clickState == 3){
         frameLocations[currentFrame] = [event.clientX - rect.left, event.clientY - rect.top];
+        displayData();
         nextFrame();
     }
 }
@@ -220,10 +223,57 @@ function trackPoints(){
     clickState = 3;
 }
 
-
 // Resets the button and cursor for when you are tracking points
 function resetTrackButton(){
     document.body.style.cursor = "default";
     document.getElementById("trackPoints").innerHTML = "Track points";
     document.getElementById("trackPoints").setAttribute("onclick",  "trackPoints()");
+    
+}
+
+function displayData(){
+    var mainTable = document.getElementById("dataTable");
+
+    var newEntry;
+    var newFrame;
+    var newT;
+    var newX;
+    var newY;
+    var newV;
+
+    mainTable.innerHTML = "<tr><th>Frame</th><th>T</th><th>X</th><th>Y</th><th>V</th></tr>";
+
+    for(i=1; i<frameCount + 1; i++){
+
+        newEntry = document.createElement("tr");
+        newFrame = document.createElement("td");
+        newT = document.createElement("td");
+        newX = document.createElement("td");
+        newY = document.createElement("td");
+        newV = document.createElement("td");
+
+        newFrame.innerHTML = i;
+        newT.innerHTML = ((1 / frameRate) * i).toFixed(2);
+
+        if(frameLocations[i]){
+            newX.innerHTML = (frameLocations[i][0] * distanceRatio).toFixed(2);
+            newY.innerHTML = (frameLocations[i][1] * distanceRatio).toFixed(2);
+
+            if(frameLocations[i - 1]){
+                newV.innerHTML = ((Math.sqrt(Math.pow(frameLocations[i][0] - frameLocations[i - 1][0], 2) + Math.pow(frameLocations[i][1] - frameLocations[i - 1][1], 2))  * distanceRatio) / (1/frameRate)).toFixed(2);
+            } else {
+                newV.innerHTML = 0;
+            }
+
+        
+        newEntry.appendChild(newFrame);
+        newEntry.appendChild(newT);
+        newEntry.appendChild(newX);
+        newEntry.appendChild(newY);
+        newEntry.appendChild(newV);
+    
+        mainTable.appendChild(newEntry);
+
+        }
+    }
 }
