@@ -44,3 +44,11 @@ table {
     height: 200px;
     overflow-y: scroll;
 }
+
+button {
+    background-color: #F6008D;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 4px;;
+}

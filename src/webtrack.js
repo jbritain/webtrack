@@ -58,9 +58,6 @@ function init(){
     frameCount = Math.round(frameRate * duration);
     changeFrame();
 
-    setSizes();
-
-
     console.log("init")
 
 }
@@ -126,6 +123,7 @@ function updateFile(){
 
     mainVideo.addEventListener('loadeddata', function() {
         init();
+        setSizes();
      }, false);
   
     if (file) {
@@ -163,14 +161,14 @@ function pauseVideo(){
 function canvasClick() {
     
     if (clickState == 1){
-        stickCoord1 = [event.clientX - rect.left, event.clientY - rect.top]
+        stickCoord1 = [event.pageX - rect.left, event.pageY - rect.top]
+        console.log(event.pageY)
 
         clickState = 2;
         drawShapes()
 
     } else if (clickState == 2){
-        stickCoord2 = [event.clientX - rect.left, event.clientY - rect.top]
-
+        stickCoord2 = [event.pageX - rect.left, event.pageY - rect.top]
         clickState = 0;
         document.body.style.cursor = "default";
         document.getElementById("setStick").innerHTML = "Set calibration stick";
@@ -183,7 +181,7 @@ function canvasClick() {
         drawShapes()
         document.getElementById("trackPoints").disabled = false;
     } else if (clickState == 3){
-        frameLocations[currentFrame] = [event.clientX - rect.left, event.clientY - rect.top];
+        frameLocations[currentFrame] = [event.pageX - rect.left, event.pageY - rect.top];
         displayData();
         nextFrame();
     }
