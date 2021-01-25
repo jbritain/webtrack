@@ -26,6 +26,7 @@ var clickState = 0; // What action should be performed when the canvas is clicke
 // 1 - Place first point for calibration stick
 // 2 - Place second point for calibration stick
 // 3 - Place point to indicate projectile location
+// 4 - Debug info for mouse position
 
  // Initialise all variables storing page elements
 function pageInit(){
@@ -42,8 +43,6 @@ function setSizes(){
     mainCanvas.height = mainVideo.offsetHeight;
     document.getElementById("mainContainer").style.height = mainVideo.offsetHeight;
     mainCanvas.width = mainVideo.offsetWidth;
-
-    console.log("sizes set")
 }
 
 // Set values for variables that change per video
@@ -57,9 +56,6 @@ function init(){
     duration = mainVideo.duration;
     frameCount = Math.round(frameRate * duration);
     changeFrame();
-
-    console.log("init")
-
 }
 
 window.onresize = setSizes(); drawShapes();
@@ -161,14 +157,13 @@ function pauseVideo(){
 function canvasClick() {
     
     if (clickState == 1){
-        stickCoord1 = [event.pageX - rect.left, event.pageY - rect.top]
-        console.log(event.pageY)
+        stickCoord1 = [event.pageX - mainContainer.offsetLeft, event.pageY - mainContainer.offsetTop];
 
         clickState = 2;
         drawShapes()
 
     } else if (clickState == 2){
-        stickCoord2 = [event.pageX - rect.left, event.pageY - rect.top]
+        stickCoord2 = [event.pageX - mainContainer.offsetLeft, event.pageY - mainContainer.offsetTop];
         clickState = 0;
         document.body.style.cursor = "default";
         document.getElementById("setStick").innerHTML = "Set calibration stick";
@@ -181,9 +176,14 @@ function canvasClick() {
         drawShapes()
         document.getElementById("trackPoints").disabled = false;
     } else if (clickState == 3){
-        frameLocations[currentFrame] = [event.pageX - rect.left, event.pageY - rect.top];
+        frameLocations[currentFrame] = [event.pageX - mainContainer.offsetLeft, event.pageY - mainContainer.offsetTop];
         displayData();
         nextFrame();
+    } else if (clickState == 4) {
+        console.log("Client Y: " + event.clientY)
+        console.log("Page Y: " + event.pageY)
+        console.log("Scroll: " + window.scrollY)
+        clickState = 0;
     }
 }
 
