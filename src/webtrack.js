@@ -217,7 +217,7 @@ function drawShapes(){
     // Current Tracking Point
     if(frameLocations[currentFrame]){
         ctx.strokeRect(frameLocations[currentFrame][0] - 5, frameLocations[currentFrame][1] - 5, 10, 10)
-        ctx.fillText(i, frameLocations[currentFrame][0] + 7, frameLocations[currentFrame][1] + 7);
+        ctx.fillText(currentFrame, frameLocations[currentFrame][0] + 7, frameLocations[currentFrame][1] + 7);
     }
 
     ctx.strokeStyle = "#9e0000";
