@@ -26,6 +26,7 @@ var clickState = 0; // What action should be performed when the canvas is clicke
 // 1 - Place first point for calibration stick
 // 2 - Place second point for calibration stick
 // 3 - Place point to indicate projectile location
+// 4 - Debug info for mouse position
 
  // Initialise all variables storing page elements
 function pageInit(){
@@ -42,8 +43,6 @@ function setSizes(){
     mainCanvas.height = mainVideo.offsetHeight;
     document.getElementById("mainContainer").style.height = mainVideo.offsetHeight;
     mainCanvas.width = mainVideo.offsetWidth;
-
-    console.log("sizes set")
 }
 
 // Set values for variables that change per video
@@ -57,12 +56,6 @@ function init(){
     duration = mainVideo.duration;
     frameCount = Math.round(frameRate * duration);
     changeFrame();
-
-    setSizes();
-
-
-    console.log("init")
-
 }
 
 window.onresize = setSizes(); drawShapes();
@@ -126,6 +119,7 @@ function updateFile(){
 
     mainVideo.addEventListener('loadeddata', function() {
         init();
+        setSizes();
      }, false);
   
     if (file) {
@@ -163,14 +157,13 @@ function pauseVideo(){
 function canvasClick() {
     
     if (clickState == 1){
-        stickCoord1 = [event.clientX - rect.left, event.clientY - rect.top]
+        stickCoord1 = [event.pageX - mainContainer.offsetLeft, event.pageY - mainContainer.offsetTop];
 
         clickState = 2;
         drawShapes()
 
     } else if (clickState == 2){
-        stickCoord2 = [event.clientX - rect.left, event.clientY - rect.top]
-
+        stickCoord2 = [event.pageX - mainContainer.offsetLeft, event.pageY - mainContainer.offsetTop];
         clickState = 0;
         document.body.style.cursor = "default";
         document.getElementById("setStick").innerHTML = "Set calibration stick";
@@ -183,9 +176,14 @@ function canvasClick() {
         drawShapes()
         document.getElementById("trackPoints").disabled = false;
     } else if (clickState == 3){
-        frameLocations[currentFrame] = [event.clientX - rect.left, event.clientY - rect.top];
+        frameLocations[currentFrame] = [event.pageX - mainContainer.offsetLeft, event.pageY - mainContainer.offsetTop];
         displayData();
         nextFrame();
+    } else if (clickState == 4) {
+        console.log("Client Y: " + event.clientY)
+        console.log("Page Y: " + event.pageY)
+        console.log("Scroll: " + window.scrollY)
+        clickState = 0;
     }
 }
 
@@ -219,7 +217,7 @@ function drawShapes(){
     // Current Tracking Point
     if(frameLocations[currentFrame]){
         ctx.strokeRect(frameLocations[currentFrame][0] - 5, frameLocations[currentFrame][1] - 5, 10, 10)
-        ctx.fillText(i, frameLocations[currentFrame][0] + 7, frameLocations[currentFrame][1] + 7);
+        ctx.fillText(currentFrame, frameLocations[currentFrame][0] + 7, frameLocations[currentFrame][1] + 7);
     }
 
     ctx.strokeStyle = "#9e0000";
