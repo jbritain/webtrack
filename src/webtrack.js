@@ -120,6 +120,7 @@ function updateFile(){
     mainVideo.addEventListener('loadeddata', function() {
         init();
         setSizes();
+        vidLoader.disabled = true;
      }, false);
   
     if (file) {

@@ -55,5 +55,5 @@ button {
 
 button:disabled {
     background-color: grey;
-    color: black;
+    color: darkgrey;
 }
