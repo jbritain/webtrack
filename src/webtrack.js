@@ -120,6 +120,7 @@ function updateFile(){
     mainVideo.addEventListener('loadeddata', function() {
         init();
         setSizes();
+        vidLoader.disabled = true;
      }, false);
   
     if (file) {
@@ -179,7 +180,9 @@ function canvasClick() {
         frameLocations[currentFrame] = [event.pageX - mainContainer.offsetLeft, event.pageY - mainContainer.offsetTop];
         displayData();
         nextFrame();
+
         document.getElementById("exportCSV").disabled = false;
+
     } else if (clickState == 4) {
         console.log("Client Y: " + event.clientY)
         console.log("Page Y: " + event.pageY)
