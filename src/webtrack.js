@@ -180,6 +180,9 @@ function canvasClick() {
         frameLocations[currentFrame] = [event.pageX - mainContainer.offsetLeft, event.pageY - mainContainer.offsetTop];
         displayData();
         nextFrame();
+
+        document.getElementById("exportCSV").disabled = false;
+
     } else if (clickState == 4) {
         console.log("Client Y: " + event.clientY)
         console.log("Page Y: " + event.pageY)
@@ -297,4 +300,28 @@ function displayData(){
 
         }
     }
+}
+
+function exportCSV(){
+    let csvContent = "data:text/csv;charset=utf-8,";
+    csvContent += "Frame, Time, X, Y, V" + "\r\n";
+    for (i=1; i < frameCount; i++){
+        if(frameLocations[i]){
+            let v = 0;
+            if(frameLocations[i - 1]){
+                v = (Math.sqrt(Math.pow(frameLocations[i][0] - frameLocations[i - 1][0], 2) + Math.pow(frameLocations[i][1] - frameLocations[i - 1][1], 2)) * distanceRatio) / (1/frameRate)
+            }
+            let row = i + ", " + ((1 / frameRate) * i) + ", " + frameLocations[i][0] * distanceRatio + ", " + frameLocations[i][1] * distanceRatio + ", " + v;
+            csvContent += row + "\r\n";
+        }
+    }
+
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "data.csv");
+    document.body.appendChild(link);
+
+    link.click();
 }
