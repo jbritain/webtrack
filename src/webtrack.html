@@ -3,27 +3,31 @@
         <title>webtrack</title>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="webtrack.css">
         <link rel="icon" type="image/png" href="../assets/logo.png"/>
-
+        <link href="https://unpkg.com/@primer/css@^16.0.0/dist/primer.css" rel="stylesheet">
+        <link rel="stylesheet" href="webtrack.css">
 
     </head>
 
-    <body onload="pageInit()" onscroll="setSizes(); drawShapes()">
+    <body class="p-6" onload="pageInit()" onscroll="setSizes(); drawShapes()">
         <script src="webtrack.js"></script>
 
-        <h1>webtrack</h1>
+        <h1 class="h1">webtrack</h1>
+        <hr>
+        <div class="Subhead">
+            <div class="Subhead-heading">Track</div>
+        </div>
 
-        <h3>Track</h3>
-        <input id="vidLoader" type='file' accept="video/*" onchange="updateFile()"/>
+        <input class="form-control" id="vidLoader" type='file' accept="video/*" onchange="updateFile()"/>
         <br><br>
-        <button disabled="true" onclick="setStick()" id="setStick">Set calibration stick</button>
-        <button disabled="true" onclick="trackPoints()" id="trackPoints">Track points</button>
+        <button class="btn" disabled="true" onclick="setStick()" id="setStick">Set calibration stick</button>
+        <button class="btn" disabled="true" onclick="trackPoints()" id="trackPoints">Track points</button>
+        <button class="btn" disabled="true" onclick="exportCSV()" id="exportCSV">Export Data as CSV</button>
         <br><br>
 
-        <button disabled="true" id="previousButton" onclick="previousFrame()"><span class="material-icons">skip_previous</span></button>
-        <button disabled="true" id="playButton" onclick="playVideo()"><span id="playIcon" class="material-icons">play_arrow</span></button>
-        <button disabled="true" id="nextButton" onclick="nextFrame()"><span class="material-icons">skip_next</span></button>
+        <button class="btn" disabled="true" id="previousButton" onclick="previousFrame()"><span class="material-icons">skip_previous</span></button>
+        <button class="btn" disabled="true" id="playButton" onclick="playVideo()"><span id="playIcon" class="material-icons">play_arrow</span></button>
+        <button class="btn" disabled="true" id="nextButton" onclick="nextFrame()"><span class="material-icons">skip_next</span></button>
 
         <p id="frameCounter">Current frame: 0/NAN</p>
         
@@ -44,6 +48,5 @@
             </tr>
         </table>
         <br>
-        <button disabled="true" onclick="exportCSV()" id="exportCSV">Export Data as CSV</button>
     </body>
 </html>
