@@ -20,13 +20,24 @@ function setVideoStatus(status) {
             document.getElementById("videoUploaderSection").style.display = "none";
             document.getElementById("videoFrameRateSection").style.display = "none";
             document.getElementById("videoFinishedSection").style.display = "";
+            mainVideo.framerate = document.getElementById("framerateInput").value;
             console.log("video finished")
             break;
 
         case "uploaded":
+            console.log("video uploaded");
+            
+            loadVideoData();
+
+            if(! mainVideoDisplay.canPlayType(mainVideo.data.type)){
+                alert("Video cannot be loaded")
+                document.getElementById("videoUploadStatus").style.display = "none";
+                break
+            }
+
             document.getElementById("videoUploaderSection").style.display = "none";
             document.getElementById("videoFrameRateSection").style.display = "";
-            console.log("video uploaded")
+
             break;
 
         case "uploading":

@@ -1,0 +1,10 @@
+@media screen and (orientation:portrait) {
+    #mainVideoDisplay {
+        width: 100%;
+    }
+}
+
+#mainVideoDisplay {
+    max-height: 80vh;
+    max-width: 100%;
+}

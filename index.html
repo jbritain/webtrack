@@ -22,7 +22,7 @@
                 <nav class="tabnav-tabs">
                     <a class="tabnav-tab"></a>
                     <a onclick="setTab('upload')" id="uploadTabSelector" class="tabnav-tab main-tab-selector" href="#">Select</a>
-                    <a onclick="setTab('track')" id="trackTabSelector" class="tabnav-tab main-tab-selector" href="#">Track</a>
+                    <a disabled onclick="setTab('track')" id="trackTabSelector" class="tabnav-tab main-tab-selector" href="#">Track</a>
                     <a onclick="setTab('data')" id="dataTabSelector" class="tabnav-tab main-tab-selector" href="#">Data</a>
                 </nav>
             </div>
@@ -45,7 +45,7 @@
                 <img class="mb-3" src="https://ghicons.github.com/assets/images/blue/png/Data-driven.png">
                 <h3 class="mb-1">Enter your video's framerate</h3>
                 <p>Most phones record at 30fps by default</p>
-                <input value="30" class="form-control" type="number">
+                <input id="framerateInput" value="30" class="form-control" type="number">
                 <button onclick="setVideoStatus('finished')" class="btn btn-primary my-3">Submit</button>
             </div>
 
@@ -53,13 +53,16 @@
                 <img class="mb-3" src="https://ghicons.github.com/assets/images/blue/png/Celebration.png">
                 <h3 class="mb-1">Done!</h3>
                 <p>Your video has been submitted!</p>
-                <button class="btn btn-primary my-3">Get Tracking</button>
+                <button onclick="setTab('track');" class="btn btn-primary my-3">Get Tracking</button>
+                <p>To use another video, reload the page.</p>
             </div>
 
         </section>
 
         <section class="p-6 main-tab" id="trackTab">
-            <h1>track</h1>
+            <video id="mainVideoDisplay">
+                <source id="mainVideoDisplaySource">
+            </video>
         </section>
 
         <section class="p-6 main-tab" id="dataTab">
@@ -67,5 +70,6 @@
         </section>
 
         <script src="js/contentDisplay.js"></script>
+        <script src="js/track.js"></script>
     </body>
 </html>
