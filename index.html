@@ -5,6 +5,9 @@
         <title>webtrack</title>
 
         <link href="https://unpkg.com/@primer/css@^16.0.0/dist/primer.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/main.css">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
     <body>
@@ -18,11 +21,51 @@
             <div class="tabnav">
                 <nav class="tabnav-tabs">
                     <a class="tabnav-tab"></a>
-                    <a id="uploadTab" class="tabnav-tab" href="#">Upload</a>
-                    <a id="trackTab" class="tabnav-tab" href="#">Track</a>
-                    <a id="dataTab" class="tabnav-tab" href="#">Data</a>
+                    <a onclick="setTab('upload')" id="uploadTabSelector" class="tabnav-tab main-tab-selector" href="#">Select</a>
+                    <a onclick="setTab('track')" id="trackTabSelector" class="tabnav-tab main-tab-selector" href="#">Track</a>
+                    <a onclick="setTab('data')" id="dataTabSelector" class="tabnav-tab main-tab-selector" href="#">Data</a>
                 </nav>
             </div>
         </section>
+
+        <section class="p-6 main-tab" id="uploadTab">
+
+            <div id="videoUploaderSection" class="blankslate">
+                <img class="mb-3" src="https://ghicons.github.com/assets/images/blue/png/Hosting.png">
+                <h3 class="mb-1">Select your video</h3>
+                <p>No data is sent to the server at any point, as all operations are performed locally.</p>
+                <label for="videoUploader" class="btn btn-primary my-3">Select video</label>
+                <input onclick="setVideoStatus('uploading')" onchange="setVideoStatus('uploaded')" style="display: none;" id="videoUploader" type='file' accept="video/*"/>
+                
+                <br>
+                <p style="display: none;" id="videoUploadStatus"><span>Loading</span><span class="AnimatedEllipsis"></span></p>
+            </div>
+
+            <div style="display: none;" class="blankslate" id="videoFrameRateSection">
+                <img class="mb-3" src="https://ghicons.github.com/assets/images/blue/png/Data-driven.png">
+                <h3 class="mb-1">Enter your video's framerate</h3>
+                <p>Most phones record at 30fps by default</p>
+                <input value="30" class="form-control" type="number">
+                <button onclick="setVideoStatus('finished')" class="btn btn-primary my-3">Submit</button>
+            </div>
+
+            <div style="display: none;" class="blankslate" id="videoFinishedSection">
+                <img class="mb-3" src="https://ghicons.github.com/assets/images/blue/png/Celebration.png">
+                <h3 class="mb-1">Done!</h3>
+                <p>Your video has been submitted!</p>
+                <button class="btn btn-primary my-3">Get Tracking</button>
+            </div>
+
+        </section>
+
+        <section class="p-6 main-tab" id="trackTab">
+            <h1>track</h1>
+        </section>
+
+        <section class="p-6 main-tab" id="dataTab">
+            <h1>data</h1>
+        </section>
+
+        <script src="js/contentDisplay.js"></script>
     </body>
 </html>
