@@ -1,14 +1,28 @@
-<html>
+<!DOCTYPE html>
+
+<html data-color-mode="auto" data-light-theme="light" data-dark-theme="dark">
     <head>
-        <title>webtrack - home</title>
-        <link rel="stylesheet" href="stylesheet.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/png" href="assets/logo.png"/>
+        <title>webtrack</title>
+
+        <link href="https://unpkg.com/@primer/css@^16.0.0/dist/primer.css" rel="stylesheet">
     </head>
 
     <body>
-        <img style="width: 100%;" src="assets/banner.png">
-        <h1 style="text-align: center; font-size: 5em;">track projectile motion, right in your browser</h1>
-        <h1 style="text-align: center;"><a href="src/webtrack.html">Go to webtrack</a></h1>
+        <div class="Header">
+            <div class="Header-item">
+                <img src="assets/banner.png" height="32px">
+            </div>
+        </div>
+        <br>
+        <section>
+            <div class="tabnav">
+                <nav class="tabnav-tabs">
+                    <a class="tabnav-tab"></a>
+                    <a id="uploadTab" class="tabnav-tab" href="#">Upload</a>
+                    <a id="trackTab" class="tabnav-tab" href="#">Track</a>
+                    <a id="dataTab" class="tabnav-tab" href="#">Data</a>
+                </nav>
+            </div>
+        </section>
     </body>
 </html>
