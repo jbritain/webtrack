@@ -1,10 +1,63 @@
 @media screen and (orientation:portrait) {
-    #mainVideoDisplay {
+    #mainVideoContainer, #mainVideoDisplay {
         width: 100%;
     }
 }
 
-#mainVideoDisplay {
+#mainVideoContainer, #mainVideoDisplay{
     max-height: 80vh;
     max-width: 100%;
+}
+  
+#mainVideoCanvas, #mainVideoDisplay {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    float: left;
+}
+
+table {
+    background-color: var(--color-bg-primary);
+    border-color: var(--color-border-primary);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 6px;
+    border-collapse: collapse;
+    display: block;
+    max-width: -moz-fit-content;
+    max-width: fit-content;
+    margin: 0 auto;
+    overflow-x: auto;
+    text-align: left;
+    position: relative;
+    margin-left: 0px;
+}
+
+th {
+    padding: 16px;
+    margin: -1px -1px 0;
+    background-color: var(--color-bg-tertiary);
+    border-color: var(--color-border-primary);
+    border-style: solid;
+    border-width: 1px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+td {
+    padding: 16px;
+    margin-top: -1px;
+    list-style-type: none;
+    border-top-color: var(--color-border-secondary);
+    border-top-style: solid;
+    border-top-width: 1px;
+
+    border-right-color: var(--color-border-secondary);
+    border-right-style: solid;
+    border-right-width: 1px;
+}
+
+td:last-child {
+    border-right: none;
 }

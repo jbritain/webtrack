@@ -21,7 +21,14 @@ function setVideoStatus(status) {
             document.getElementById("videoFrameRateSection").style.display = "none";
             document.getElementById("videoFinishedSection").style.display = "";
             mainVideo.framerate = document.getElementById("framerateInput").value;
+
+            mainVideoDisplay.load();
+            for(let e of document.getElementsByClassName("videoMissing")){
+                e.style.display = "none";
+            }
+
             console.log("video finished")
+
             break;
 
         case "uploaded":
