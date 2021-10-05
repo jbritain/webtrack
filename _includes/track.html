@@ -1,0 +1,31 @@
+<section class="p-6 main-tab" id="trackTab">
+    <div class="blankslate videoMissing" id="videoFinishedSection">
+        <img class="mb-3" src="https://ghicons.github.com/assets/images/blue/png/CLI%20status%20check.png ">
+        <h3 class="mb-1">No video has been loaded</h3>
+
+        <button onclick="setTab('upload');" class="btn btn-primary my-3">Upload a video</button>
+
+    </div>
+    
+    <button id="addCalibrationStick" class="btn">Add calibration stick</button>
+    <button id="addMass" class="btn">Add point mass</button>
+    <select disabled id="massSelector" class="form-select" aria-label="Mass Selector">
+
+    </select>
+
+    <hr>
+    <div class="mainVideoContainer">
+        <video id="mainVideoDisplay">
+            <source id="mainVideoDisplaySource">
+        </video>
+        <canvas id="mainVideoCanvas">
+            
+        </canvas>
+    </div>
+    <hr>
+    <div class="videoControls">
+        <button class="btn">
+            {% octicon alert height:32 class:"right left" aria-label:hi %}
+        </button>
+    </div>
+</section>
