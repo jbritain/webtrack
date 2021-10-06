@@ -8,13 +8,16 @@
     </div>
     
     <button id="addCalibrationStick" class="btn">Add calibration stick</button>
-    <button id="addMass" class="btn">Add point mass</button>
+    <button onclick="addMass()" id="addMass" class="btn">Add point mass</button>
+
+    <span class="verticalDivider"></span>
+
     <select disabled id="massSelector" class="form-select" aria-label="Mass Selector">
 
     </select>
 
     <hr>
-    <div class="mainVideoContainer">
+    <div id="mainVideoContainer">
         <video id="mainVideoDisplay">
             <source id="mainVideoDisplaySource">
         </video>
@@ -22,10 +25,20 @@
             
         </canvas>
     </div>
-    <hr>
-    <div class="videoControls">
-        <button class="btn">
-            {% octicon alert height:32 class:"right left" aria-label:hi %}
+    <div id="videoControls">
+        <span id="videoProgress" class="Progress">
+            <span id="videoProgressIndicator" class="Progress-item color-bg-success-inverse" style="width: 50%;"></span>
+        </span>
+        <br>
+        <p id="frameCounter">Frame 0 of NaN</p>
+        <button onclick="previousFrame()" class="btn">
+            {% octicon chevron-left height:24 %}
+        </button>
+        <button onclick="togglePlaying()" class="btn">
+            {% octicon play height:24 %}
+        </button>
+        <button onclick="nextFrame()" class="btn">
+            {% octicon chevron-right height:24 %}
         </button>
     </div>
 </section>

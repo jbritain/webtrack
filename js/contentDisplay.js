@@ -1,5 +1,27 @@
-let tabSelectors = document.getElementsByClassName("main-tab-selector");
-let tabs = document.getElementsByClassName("main-tab");
+var mainVideoDisplay = document.getElementById("mainVideoDisplay");
+var mainVideoDisplaySource = document.getElementById("mainVideoDisplaySource");
+var mainVideoCanvas = document.getElementById("mainVideoCanvas");
+var mainVideoContainer = document.getElementById("mainVideoContainer");
+var videoProgressBar = document.getElementById("videoProgress");
+var videoProgressIndicator = document.getElementById("videoProgressIndicator");
+var massSelector = document.getElementById("massSelector")
+
+var mainVideoDisplayWidth;var mainVideoDisplayHeight
+var mainVideoDisplayHeight;
+
+var tabSelectors = document.getElementsByClassName("main-tab-selector");
+var tabs = document.getElementsByClassName("main-tab");
+
+function updateSizes(){
+    mainVideoDisplayHeight = mainVideoDisplay.getBoundingClientRect().bottom - mainVideoDisplay.getBoundingClientRect().top;
+    mainVideoDisplayWidth = mainVideoDisplay.getBoundingClientRect().right - mainVideoDisplay.getBoundingClientRect().left;
+
+    mainVideoCanvas.style.marginTop = "-" + mainVideoDisplayHeight + "px";
+    mainVideoCanvas.style.height = mainVideoDisplayHeight + "px";
+    mainVideoContainer.style.height = mainVideoDisplayHeight + "px";
+    videoProgressBar.style.width = mainVideoDisplayWidth + "px";
+}
+
 
 function setTab(tabName){
     for (let tabSelector of tabSelectors) {
@@ -12,6 +34,11 @@ function setTab(tabName){
     
     document.getElementById(tabName + "TabSelector").ariaCurrent = "page";
     document.getElementById(tabName + "Tab").style.display = "";
+
+    updateFrame();
+    updateSizes();
+    frameCount = Math.floor(mainVideo.framerate * mainVideoDisplay.duration);
+    updateFrame();
 }
 
 function setVideoStatus(status) {
@@ -20,19 +47,20 @@ function setVideoStatus(status) {
             document.getElementById("videoUploaderSection").style.display = "none";
             document.getElementById("videoFrameRateSection").style.display = "none";
             document.getElementById("videoFinishedSection").style.display = "";
-            mainVideo.framerate = document.getElementById("framerateInput").value;
+            mainVideo.framerate = parseFloat(document.getElementById("framerateInput").value);
 
             mainVideoDisplay.load();
             for(let e of document.getElementsByClassName("videoMissing")){
                 e.style.display = "none";
             }
 
-            console.log("video finished")
+            mainVideo.duration = mainVideoDisplay.duration;
+
+            updateFrame();
 
             break;
 
         case "uploaded":
-            console.log("video uploaded");
             
             loadVideoData();
 
@@ -56,5 +84,9 @@ function setVideoStatus(status) {
     }
 
 }
+
+window.onresize = updateSizes;
+
+updateSizes();
 
 setTab("upload")
