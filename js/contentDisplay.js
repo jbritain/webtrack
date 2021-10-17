@@ -12,6 +12,8 @@ var mainVideoDisplayHeight;
 var tabSelectors = document.getElementsByClassName("main-tab-selector");
 var tabs = document.getElementsByClassName("main-tab");
 
+var isPlaying = false;
+
 function updateSizes(){
     mainVideoDisplayHeight = mainVideoDisplay.getBoundingClientRect().bottom - mainVideoDisplay.getBoundingClientRect().top;
     mainVideoDisplayWidth = mainVideoDisplay.getBoundingClientRect().right - mainVideoDisplay.getBoundingClientRect().left;
@@ -83,6 +85,26 @@ function setVideoStatus(status) {
             console.log("???")
     }
 
+}
+
+async function playVideo(){
+    while((currentFrame < frameCount) && isPlaying){
+        nextFrame();
+        await sleep(1000 / mainVideo.framerate);
+    }
+}
+
+function togglePlaying(){
+    if (isPlaying) {
+        isPlaying = false;
+        document.getElementById("pauseIcon").style.display = "none";
+        document.getElementById("playIcon").style.display = "initial";
+    } else {
+        isPlaying = true;
+        document.getElementById("pauseIcon").style.display = "initial";
+        document.getElementById("playIcon").style.display = "none";
+        playVideo();
+    }
 }
 
 window.onresize = updateSizes;

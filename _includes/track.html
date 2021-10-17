@@ -35,7 +35,8 @@
             {% octicon chevron-left height:24 %}
         </button>
         <button onclick="togglePlaying()" class="btn">
-            {% octicon play height:24 %}
+            <span style="display: initial" id="playIcon">{% octicon play height:24 %}</span>
+            <span style="display: none" id="pauseIcon">{% octicon columns height:24 %}</span>
         </button>
         <button onclick="nextFrame()" class="btn">
             {% octicon chevron-right height:24 %}

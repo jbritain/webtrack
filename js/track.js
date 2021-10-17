@@ -8,6 +8,8 @@ var frameCount;
 
 var masses = [];
 
+
+
 class Video {
     constructor(data, path, framerate, duration) {
         this.data = data;
@@ -65,11 +67,4 @@ function updateFrame(){
     mainVideoDisplay.currentTime = currentFrame / mainVideo.framerate;
     videoProgressIndicator.style.width = (100 * mainVideoDisplay.currentTime / mainVideoDisplay.duration) + "%";
     document.getElementById("frameCounter").innerHTML = ("Frame " + currentFrame + " of " + frameCount);
-}
-
-async function playVideo(){
-    while(currentFrame < frameCount){
-        nextFrame();
-        await sleep(1000 / mainVideo.framerate);
-    }
 }
