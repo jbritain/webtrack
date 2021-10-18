@@ -26,20 +26,34 @@
         </canvas>
     </div>
     <div id="videoControls">
-        <span id="videoProgress" class="Progress">
-            <span id="videoProgressIndicator" class="Progress-item color-bg-success-inverse" style="width: 50%;"></span>
+        <span id="videoProgress">
+            <input class="form-control" onchange="setFrame(this.value)" id="videoProgressIndicator" style="width: 100%;" type="range" min="1" max="100" value="1">
+        </span>
+        <br>
+
+        <span>
+            <button onclick="setFrame(1)" class="btn">
+                {% octicon arrow-left height:24 %}
+            </button>
+
+            <button onclick="previousFrame()" class="btn">
+                {% octicon chevron-left height:24 %}
+            </button>
+
+            <button onclick="togglePlaying()" class="btn">
+                <span style="display: initial" id="playIcon">{% octicon play height:24 %}</span>
+                <span style="display: none" id="pauseIcon">{% octicon columns height:24 %}</span>
+            </button>
+
+            <button onclick="nextFrame()" class="btn">
+                {% octicon chevron-right height:24 %}
+            </button>
+
+            <button onclick="setFrame(frameCount)" class="btn">
+                {% octicon arrow-right height:24 %}
+            </button>
         </span>
         <br>
         <p id="frameCounter">Frame 0 of NaN</p>
-        <button onclick="previousFrame()" class="btn">
-            {% octicon chevron-left height:24 %}
-        </button>
-        <button onclick="togglePlaying()" class="btn">
-            <span style="display: initial" id="playIcon">{% octicon play height:24 %}</span>
-            <span style="display: none" id="pauseIcon">{% octicon columns height:24 %}</span>
-        </button>
-        <button onclick="nextFrame()" class="btn">
-            {% octicon chevron-right height:24 %}
-        </button>
     </div>
 </section>

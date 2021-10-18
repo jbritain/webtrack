@@ -37,10 +37,15 @@ function setTab(tabName){
     document.getElementById(tabName + "TabSelector").ariaCurrent = "page";
     document.getElementById(tabName + "Tab").style.display = "";
 
-    updateFrame();
-    updateSizes();
-    frameCount = Math.floor(mainVideo.framerate * mainVideoDisplay.duration);
-    updateFrame();
+    try{ // this is the only place I could make it do this when the video loads. It just means it will try to do it when you swap tabs, which sometimes doesn't work because we haven't loaded the video yet
+        updateFrame();
+        updateSizes();
+        frameCount = Math.floor(mainVideo.framerate * mainVideoDisplay.duration);
+        videoProgressIndicator.max = frameCount;
+        updateFrame();
+    } catch(error) {
+        return
+    }
 }
 
 function setVideoStatus(status) {
@@ -59,7 +64,6 @@ function setVideoStatus(status) {
             mainVideo.duration = mainVideoDisplay.duration;
 
             updateFrame();
-
             break;
 
         case "uploaded":
@@ -82,27 +86,31 @@ function setVideoStatus(status) {
             break;
 
         default:
-            console.log("???")
+            console.error(status + " is not a valid status")
     }
 
 }
 
-async function playVideo(){
-    while((currentFrame < frameCount) && isPlaying){
-        nextFrame();
-        await sleep(1000 / mainVideo.framerate);
-    }
+function playVideo(){
+    isPlaying = true;
+    document.getElementById("pauseIcon").style.display = "initial";
+    document.getElementById("playIcon").style.display = "none";
+    
+    mainVideoDisplay.play();
+}
+
+function pauseVideo(){
+    isPlaying = false;
+    document.getElementById("pauseIcon").style.display = "none";
+    document.getElementById("playIcon").style.display = "initial";
+
+    mainVideoDisplay.pause();
 }
 
 function togglePlaying(){
     if (isPlaying) {
-        isPlaying = false;
-        document.getElementById("pauseIcon").style.display = "none";
-        document.getElementById("playIcon").style.display = "initial";
+        pauseVideo();
     } else {
-        isPlaying = true;
-        document.getElementById("pauseIcon").style.display = "initial";
-        document.getElementById("playIcon").style.display = "none";
         playVideo();
     }
 }

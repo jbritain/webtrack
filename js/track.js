@@ -63,8 +63,27 @@ function previousFrame(){
     }
 }
 
+function setFrame(frame){
+    currentFrame = parseInt(frame);
+    updateFrame();
+}
+
 function updateFrame(){
     mainVideoDisplay.currentTime = currentFrame / mainVideo.framerate;
-    videoProgressIndicator.style.width = (100 * mainVideoDisplay.currentTime / mainVideoDisplay.duration) + "%";
+    videoProgressIndicator.value = currentFrame;
     document.getElementById("frameCounter").innerHTML = ("Frame " + currentFrame + " of " + frameCount);
 }
+
+var frameUpdater = setInterval(
+    function(){
+        if(isPlaying){
+            currentFrame = Math.round(mainVideoDisplay.currentTime * mainVideo.framerate);
+            videoProgressIndicator.value = currentFrame;
+            document.getElementById("frameCounter").innerHTML = ("Frame " + currentFrame + " of " + frameCount);
+
+            if(currentFrame > frameCount){
+                pauseVideo();
+            }
+        }
+    }, 10
+)
