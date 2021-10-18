@@ -1,3 +1,7 @@
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 var mainVideoDisplay = document.getElementById("mainVideoDisplay");
 var mainVideoDisplaySource = document.getElementById("mainVideoDisplaySource");
 var mainVideoCanvas = document.getElementById("mainVideoCanvas");
@@ -13,6 +17,10 @@ var tabSelectors = document.getElementsByClassName("main-tab-selector");
 var tabs = document.getElementsByClassName("main-tab");
 
 var isPlaying = false;
+
+var mainVideo;
+var currentFrame = 0;
+var frameCount;
 
 function updateSizes(){
     mainVideoDisplayHeight = mainVideoDisplay.getBoundingClientRect().bottom - mainVideoDisplay.getBoundingClientRect().top;
@@ -114,6 +122,50 @@ function togglePlaying(){
         playVideo();
     }
 }
+
+function loadVideoData() {
+    mainVideo = new Video(document.getElementById("videoUploader").files[0], URL.createObjectURL(document.getElementById("videoUploader").files[0]), 0, 0);
+    mainVideoDisplaySource.src = mainVideo.path;
+}
+
+function nextFrame(){
+    if(currentFrame < frameCount){
+        currentFrame = currentFrame + 1;
+        updateFrame();
+    }
+}
+
+function previousFrame(){
+    if(currentFrame > 0){
+        currentFrame = currentFrame - 1;
+        updateFrame();
+    }
+}
+
+function setFrame(frame){
+    currentFrame = parseInt(frame);
+    updateFrame();
+}
+
+function updateFrame(){
+    mainVideoDisplay.currentTime = currentFrame / mainVideo.framerate;
+    videoProgressIndicator.value = currentFrame;
+    document.getElementById("frameCounter").innerHTML = ("Frame " + currentFrame + " of " + frameCount);
+}
+
+var frameUpdater = setInterval(
+    function(){
+        if(isPlaying){
+            currentFrame = Math.round(mainVideoDisplay.currentTime * mainVideo.framerate);
+            videoProgressIndicator.value = currentFrame;
+            document.getElementById("frameCounter").innerHTML = ("Frame " + currentFrame + " of " + frameCount);
+
+            if(currentFrame > frameCount){
+                pauseVideo();
+            }
+        }
+    }, 10
+)
 
 window.onresize = updateSizes;
 
