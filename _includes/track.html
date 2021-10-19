@@ -7,11 +7,12 @@
 
     </div>
     
-    <button id="addCalibrationStick" class="btn">Add calibration stick</button>
+    <button id="addCalibrationStick" onclick="setMode('calibration')" class="btn">Set calibration stick</button>
     <button onclick="addMass()" id="addMass" class="btn">Add point mass</button>
 
     <span class="verticalDivider"></span>
 
+    <button disabled id="massTrackButton" onclick="setMode('mass')" id="addMass" class="btn">Track Mass</button>
     <select disabled id="massSelector" class="form-select" aria-label="Mass Selector">
 
     </select>
@@ -21,7 +22,7 @@
         <video id="mainVideoDisplay">
             <source id="mainVideoDisplaySource">
         </video>
-        <canvas id="mainVideoCanvas">
+        <canvas onclick="canvasClick(event)" id="mainVideoCanvas">
             
         </canvas>
     </div>
