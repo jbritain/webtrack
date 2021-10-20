@@ -1,3 +1,2 @@
-
-debug.log
-testVid.mp4
+_site/*
+.jekyll-cache/*
