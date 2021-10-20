@@ -2,15 +2,27 @@ var dataTableContainer = document.getElementById("dataTableContainer");
 
 var fields = [
     ["Frame", "coordIndex"],
-    ["X", "mass.data[coordIndex][0]"],
-    ["Y", "mass.data[coordIndex][1]"]
+    ["X", "mass.realData[coordIndex].x"],
+    ["Y", "mass.realData[coordIndex].y"]
 ]
+
+function distanceBetweenPoints(point1, point2){
+    var a = Math.abs(point1.x - point2.x);
+    var b = Math.abs(point1.y - point2.y);
+
+    var c = Math.sqrt(Math.pow(a, 2) + Math.pow(a, 2))
+
+    return c
+}
 
 function addData(){
     dataTableContainer.innerHTML = "";
     masses.forEach((mass, massIndex) => {
+
         title = document.createElement("h2");
         title.innerText = mass.name;
+
+        title.style.color = massColours[massIndex][0];
 
         table = document.createElement("table");
 
@@ -25,7 +37,7 @@ function addData(){
 
         table.appendChild(tableHeader);
 
-        mass.data.forEach((coord, coordIndex) => {
+        mass.realData.forEach((coord, coordIndex) => {
             row = document.createElement("tr");
 
             fields.forEach((field) => {

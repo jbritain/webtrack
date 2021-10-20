@@ -82,3 +82,8 @@ td:last-child {
 #frameCounter {
     float: left;
 }
+
+.circle {
+    border-radius: 50%;
+    display: inline-block;
+}

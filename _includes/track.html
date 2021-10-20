@@ -8,7 +8,7 @@
     </div>
     
     <button id="addCalibrationStick" onclick="setMode('calibration')" class="btn">Set calibration stick</button>
-    <button onclick="addMass()" id="addMass" class="btn">Add point mass</button>
+    <button disabled onclick="addMass()" id="addMass" class="btn">Add point mass</button>
 
     <span class="verticalDivider"></span>
 
@@ -33,7 +33,7 @@
         <br>
 
         <span>
-            <button onclick="setFrame(1)" class="btn">
+            <button onclick="setFrame(0)" class="btn">
                 {% octicon arrow-left height:24 %}
             </button>
 

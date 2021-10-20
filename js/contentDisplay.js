@@ -11,8 +11,9 @@ var videoProgressIndicator = document.getElementById("videoProgressIndicator");
 var massSelector = document.getElementById("massSelector")
 var massTrackButton = document.getElementById("massTrackButton")
 var calibrationStickButton = document.getElementById("addCalibrationStick")
+var addMassButton = document.getElementById("addMass");
 
-var mainVideoDisplayWidth;var mainVideoDisplayHeight
+var mainVideoDisplayWidth;var mainVideoDisplayHeight;
 var mainVideoDisplayHeight;
 
 var tabSelectors = document.getElementsByClassName("main-tab-selector");
@@ -93,6 +94,10 @@ function setTab(tabName){ // change tabs
         updateFrame();
     } catch(error) {
         return
+    }
+
+    if(masses.length > 0){
+        addData();
     }
 }
 
