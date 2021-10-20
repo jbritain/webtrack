@@ -21,7 +21,7 @@ function getVelocity(inputMassIndex, inputCoordIndex){
     } else {
         console.log(inputCoordIndex);
         console.log(inputMassIndex);
-        return "Nah man";
+        return "NaN";
     }
 }
 
