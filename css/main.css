@@ -6,7 +6,12 @@
 
 #mainVideoContainer, #mainVideoDisplay, #mainVideoCanvas{
     max-height: 80vh !important;
-    max-width: 100% !important; 
+    max-width: 100% !important;
+    text-align: center;
+}
+
+#mainVideoContainer {
+    margin: 0 auto;
 }
   
 #mainVideoCanvas, #mainVideoDisplay {

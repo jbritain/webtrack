@@ -28,8 +28,9 @@ canvasCTX = mainVideoCanvas.getContext("2d");
 
 function updateSizes(){ // reset the sizes of elements if page is resized
 
-    mainVideoDisplay.style.width = ((mainVideoDisplay.videoWidth / mainVideoDisplay.videoHeight) * 80) + "vh"
-    mainVideoCanvas.style.width = ((mainVideoDisplay.videoWidth / mainVideoDisplay.videoHeight) * 80) + "vh"
+    mainVideoDisplay.style.width = ((mainVideoDisplay.videoWidth / mainVideoDisplay.videoHeight) * 80) + "vh";
+    mainVideoCanvas.style.width = ((mainVideoDisplay.videoWidth / mainVideoDisplay.videoHeight) * 80) + "vh";
+    mainVideoContainer.style.width = ((mainVideoDisplay.videoWidth / mainVideoDisplay.videoHeight) * 80) + "vh";
 
     mainVideoDisplayHeight = mainVideoDisplay.getBoundingClientRect().bottom - mainVideoDisplay.getBoundingClientRect().top;
     mainVideoDisplayWidth = mainVideoDisplay.getBoundingClientRect().right - mainVideoDisplay.getBoundingClientRect().left;
@@ -40,6 +41,7 @@ function updateSizes(){ // reset the sizes of elements if page is resized
     videoProgressBar.style.width = mainVideoDisplayWidth + "px";
     mainVideoCanvas.height = mainVideoDisplay.videoHeight;
     mainVideoCanvas.width = mainVideoDisplay.videoWidth;
+    
 
 
     drawCanvas();
@@ -82,9 +84,10 @@ function setTab(tabName){ // change tabs
     document.getElementById(tabName + "TabSelector").ariaCurrent = "page";
     document.getElementById(tabName + "Tab").style.display = "";
 
+    updateSizes();
+
     try{ // this is the only place I could make it do this when the video loads. It just means it will try to do it when you swap tabs, which sometimes doesn't work because we haven't loaded the video yet
         updateFrame();
-        updateSizes();
         frameCount = Math.floor(mainVideo.framerate * mainVideoDisplay.duration);
         videoProgressIndicator.max = frameCount;
         updateFrame();
