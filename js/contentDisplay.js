@@ -27,6 +27,10 @@ var frameCount;
 canvasCTX = mainVideoCanvas.getContext("2d");
 
 function updateSizes(){ // reset the sizes of elements if page is resized
+
+    mainVideoDisplay.style.width = ((mainVideoDisplay.videoWidth / mainVideoDisplay.videoHeight) * 80) + "vh"
+    mainVideoCanvas.style.width = ((mainVideoDisplay.videoWidth / mainVideoDisplay.videoHeight) * 80) + "vh"
+
     mainVideoDisplayHeight = mainVideoDisplay.getBoundingClientRect().bottom - mainVideoDisplay.getBoundingClientRect().top;
     mainVideoDisplayWidth = mainVideoDisplay.getBoundingClientRect().right - mainVideoDisplay.getBoundingClientRect().left;
 
@@ -36,6 +40,9 @@ function updateSizes(){ // reset the sizes of elements if page is resized
     videoProgressBar.style.width = mainVideoDisplayWidth + "px";
     mainVideoCanvas.height = mainVideoDisplay.videoHeight;
     mainVideoCanvas.width = mainVideoDisplay.videoWidth;
+
+
+    drawCanvas();
 }
 
 function setMode(mode){
@@ -202,7 +209,5 @@ var frameUpdater = setInterval( // updates the frame counter as video plays
 )
 
 window.onresize = updateSizes;
-
-updateSizes();
 
 setTab("upload") // upload tab by default

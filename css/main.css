@@ -4,9 +4,9 @@
     }
 }
 
-#mainVideoContainer, #mainVideoDisplay{
-    max-height: 80vh;
-    max-width: 100%;
+#mainVideoContainer, #mainVideoDisplay, #mainVideoCanvas{
+    max-height: 80vh !important;
+    max-width: 100% !important; 
 }
   
 #mainVideoCanvas, #mainVideoDisplay {
