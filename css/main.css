@@ -87,3 +87,14 @@ td:last-child {
     width: 100%;
     height: 100vh;
 }
+
+blockquote {
+    font-size: 16px;
+    font-style: italic;
+    padding-left: 8px;
+    border-left: 2px solid var(--color-border-primary);
+}
+
+footer {
+    background-color: var(--color-header-bg);
+}
