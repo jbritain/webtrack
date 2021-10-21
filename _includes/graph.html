@@ -1,0 +1,27 @@
+<section class="p-6 main-tab" id="graphTab">
+
+    <div class="blankslate videoMissing" id="videoFinishedSection">
+        <img class="mb-3" src="https://ghicons.github.com/assets/images/blue/png/CLI%20status%20check.png ">
+        <h3 class="mb-1">No video has been loaded</h3>
+
+        <button onclick="setTab('upload');" class="btn btn-primary my-3">Upload a video</button>
+
+    </div>
+
+    <p>
+        I want to graph 
+        <select class="form-select" id="graphField2Selector"></select>
+         against
+        <select class="form-select" id="graphField1Selector"></select>
+         for mass
+        <select class="form-select" id="graphMassSelector"></select>
+    </p>
+
+    <button onclick="drawMainGraph()" class="btn btn-primary">Graph it</button>
+
+    <br><br>
+
+    <div id="mainGraph">
+
+    </div>
+</section>

@@ -9,6 +9,7 @@ var mainVideoContainer = document.getElementById("mainVideoContainer");
 var videoProgressBar = document.getElementById("videoProgress");
 var videoProgressIndicator = document.getElementById("videoProgressIndicator");
 var massSelector = document.getElementById("massSelector")
+var graphMassSelector = document.getElementById("graphMassSelector")
 var massTrackButton = document.getElementById("massTrackButton")
 var calibrationStickButton = document.getElementById("addCalibrationStick")
 var addMassButton = document.getElementById("addMass");

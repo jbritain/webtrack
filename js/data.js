@@ -1,12 +1,30 @@
 var dataTableContainer = document.getElementById("dataTableContainer");
 var frameDelta;
 
+var field1Selector = document.getElementById("graphField1Selector");
+var field2Selector = document.getElementById("graphField2Selector");
+
 var fields = [
     ["Frame", "coordIndex"],
+    ["Time", "frameDelta * coordIndex"],
     ["X", "mass.realData[coordIndex].x"],
     ["Y", "mass.realData[coordIndex].y"],
-    ["V", "getVelocity(massIndex,coordIndex)"]
+    ["V", "getVelocity(massIndex,coordIndex)"],
 ];
+
+fields.forEach(field => {
+    newField = document.createElement("option");
+    newField.value = field[0];
+    newField.innerText = field[0];
+
+    field1Selector.appendChild(newField);
+
+    newField = document.createElement("option");
+    newField.value = field[0];
+    newField.innerText = field[0];
+
+    field2Selector.appendChild(newField);
+})
 
 function getVelocity(inputMassIndex, inputCoordIndex){
     if(inputCoordIndex in masses[inputMassIndex].realData && inputCoordIndex - 1 in masses[inputMassIndex].realData){
@@ -14,13 +32,8 @@ function getVelocity(inputMassIndex, inputCoordIndex){
         s = distanceBetweenPoints(masses[inputMassIndex].realData[inputCoordIndex], masses[inputMassIndex].realData[inputCoordIndex - 1]);
         t = frameDelta;
 
-        console.log(s);
-        console.log(t);
-
         return s/t
-    } else {
-        console.log(inputCoordIndex);
-        console.log(inputMassIndex);
+    } else { 
         return "NaN";
     }
 }
@@ -44,6 +57,9 @@ function addData(){
         title.innerText = mass.name;
 
         table = document.createElement("table");
+        table.classList.add("dataTable");
+
+        table.id = mass.name + "Table";
 
         tableHeader = document.createElement("tr");
 
