@@ -53,6 +53,12 @@ function addMass(){ // create a new mass
 
     massTrackButton.disabled = false;
     massSelector.disabled = false;
+
+    newMass2 = document.createElement("option");
+    newMass2.value = newMassName;
+    newMass2.innerText = newMassName;
+
+    graphMassSelector.appendChild(newMass2);
 }
 
 function getCanvasCoords(inputCoords){ // get coordinates of a click relative to the canvas

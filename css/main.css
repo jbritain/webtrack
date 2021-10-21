@@ -83,7 +83,7 @@ td:last-child {
     float: left;
 }
 
-.circle {
-    border-radius: 50%;
-    display: inline-block;
+#mainGraph {
+    width: 100%;
+    height: 100vh;
 }
