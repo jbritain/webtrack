@@ -7,7 +7,7 @@ permalink: /
 
 ## Open Source Video Motion Tracking
 
-<img src="assets/screenshot" style="max-width: 100%; width: 500px;">
+<img src="assets/screenshot.png" style="max-width: 100%; width: 500px;">
 
 <a href="webtrack.html"><button class="btn btn-primary">Get Tracking</button></a>
 
