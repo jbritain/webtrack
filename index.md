@@ -2,9 +2,9 @@
 layout: page
 ---
 
-<img src="/assets/banner.png" style="max-width: 100%; max-height: 96px">
+<img src="{{ '/assets/banner.png' | relative_url }}" style="max-width: 100%; max-height: 96px">
 ## Open Source Video Motion Tracking
-<img src="/assets/screenshot.png" style="max-width: 100%; width: 500px;">
+<img src="{{ '/assets/screenshot.png' | relative_url }}" style="max-width: 100%; width: 500px;">
 
 <a href="webtrack.html"><button class="btn btn-primary">Get Tracking</button></a>
 
