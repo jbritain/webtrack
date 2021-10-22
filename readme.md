@@ -8,6 +8,7 @@ permalink: /
 ## Open Source Video Motion Tracking
 
 <img src="assets/screenshot.png" style="max-width: 100%; width: 500px;">
+This screenshot is not real, and uses a random image from the internet. I did not have any test footage that didn't contain my or a friend's face, so I created this because it felt like the website needed a screenshot if only to show what use of the program looks like.
 
 <a href="webtrack.html"><button class="btn btn-primary">Get Tracking</button></a>
 
