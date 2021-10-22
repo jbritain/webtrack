@@ -1,5 +1,6 @@
 ---
 layout: page
+permalink: /
 ---
 
 <img src="{{ '/assets/banner.png' | relative_url }}" style="max-width: 100%; max-height: 96px">
